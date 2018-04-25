@@ -4,11 +4,20 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SimpleBlog.ViewModels;
+using System.Web.Security;
 
 namespace SimpleBlog.Controllers
 {
     public class AuthController : Controller
     {
+
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToRoute("home");
+        }
+
+
         // GET: Auth
         [HttpGet]
         public ActionResult Login()
@@ -17,21 +26,20 @@ namespace SimpleBlog.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(AuthLogin Al)
+        public ActionResult Login(AuthLogin Al, string returnUrl)
         {
             if (!ModelState.IsValid)
-            {
                 return View(Al);
+
+            FormsAuthentication.SetAuthCookie($"{Al.Username}", true); // автентифікація
+            
+            if (!String.IsNullOrWhiteSpace(returnUrl))
+            {
+                return Redirect(returnUrl);
             }
 
-            if (Al.Username == "Katsuragi Misato")
-            {
-                ModelState.AddModelError("Username", "Thre is no beer in here, Captain Katsuragi");
-                return View(Al);
-            }
+            return RedirectToRoute("home");
 
-
-            return Content("Form is valid");
         }
 
     }
