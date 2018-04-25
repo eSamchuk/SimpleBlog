@@ -12,15 +12,11 @@ namespace SimpleBlog
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
-
             var NameSpaces = new[] { typeof(PostsController).Namespace };
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute("Home", "", new { controller = "Posts", action = "Index" }, NameSpaces);
             routes.MapRoute("Login", "login", new { controller = "Auth", action = "Login" }, NameSpaces);
-
-            //Areas - групи вюх, контролів та іноді - 
-
         }
     }
 }
