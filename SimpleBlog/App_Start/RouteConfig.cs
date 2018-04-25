@@ -15,8 +15,8 @@ namespace SimpleBlog
             var NameSpaces = new[] { typeof(PostsController).Namespace };
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapRoute("Home", "", new { controller = "Posts", action = "Index" }, NameSpaces);
             routes.MapRoute("Login", "login", new { controller = "Auth", action = "Login" }, NameSpaces);
+            routes.MapRoute("Home", "", new { controller = "Posts", action = "Index" }, NameSpaces);
         }
     }
 }
