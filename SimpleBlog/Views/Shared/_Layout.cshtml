@@ -1,16 +1,26 @@
-﻿@{
+﻿@using System.Web.Optimization;
+
+@{
     Layout = null;
 }
 
 <!DOCTYPE html>
-
+ 
 <html>
 <head>
     <title>@ViewBag.Title - SimpleBlog</title>
+
+    @Styles.Render("~/styles")
+
+
 </head>
 <body>
     <header>
-        <h1><a href="@Url.RouteUrl("home")">Simple Blog</a></h1>
+        <h1>
+            <a href="@Url.RouteUrl("home")">Simple Blog</a>
+            <i class="glyphicon-apple"></i>
+        </h1>
+
 
         @if (User.Identity.IsAuthenticated)
         {
@@ -35,6 +45,7 @@
         &copy; @DateTime.UtcNow.Year - Me
     </footer>
 
+    @Scripts.Render("~/scripts");
     @RenderSection("Scripts", false)
 
 </body>
